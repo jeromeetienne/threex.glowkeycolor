@@ -5,8 +5,8 @@ THREEx.GlowKeyColor	= function(renderer, camera, renderTarget, scene){
 	this.scene	= scene
 	// setup the RenderTarget
 	if( renderTarget === undefined ){
-		var textureW	= Math.floor(renderer.domElement.offsetWidth /4)
-		var textureH	= Math.floor(renderer.domElement.offsetHeight/4)
+		var textureW	= Math.floor(renderer.domElement.offsetWidth /8)
+		var textureH	= Math.floor(renderer.domElement.offsetHeight/8)
 		renderTarget	= new THREE.WebGLRenderTarget(textureW, textureH, {
 			minFilter	: THREE.LinearFilter,
 			magFilter	: THREE.LinearFilter,
@@ -20,6 +20,7 @@ THREEx.GlowKeyColor	= function(renderer, camera, renderTarget, scene){
 	this.composer	= composer
 
 // @TODO pass the srcRenderTarget, dstRenderTarget
+// - see sslensflare
 	// add Render Pass
 	var effect	= new THREE.RenderPass(scene, camera);
 	composer.addPass( effect )
@@ -46,41 +47,19 @@ THREEx.GlowKeyColor	= function(renderer, camera, renderTarget, scene){
 	console.assert( THREE.HorizontalBlurShader )
 	console.assert( THREE.VerticalBlurShader )
 
-	// add HorizontalBlur Pass
-	var effect	= new THREE.ShaderPass( THREE.HorizontalBlurShader )
-	effect.uniforms[ 'h' ].value	= blurHLevel 
-	composer.addPass( effect )
-	// add Vertical Pass
-	var effect	= new THREE.ShaderPass( THREE.VerticalBlurShader )
-	effect.uniforms[ 'v' ].value	= blurVLevel
-	composer.addPass( effect )
+	var nBlurPass	= 1
+	this.nBlurPass	= nBlurPass
+	for(var i = 0; i < nBlurPass; i++){
+		// add HorizontalBlur Pass
+		var effect	= new THREE.ShaderPass( THREE.HorizontalBlurShader )
+		effect.uniforms[ 'h' ].value	= blurHLevel 
+		composer.addPass( effect )
+		// add Vertical Pass
+		var effect	= new THREE.ShaderPass( THREE.VerticalBlurShader )
+		effect.uniforms[ 'v' ].value	= blurVLevel
+		composer.addPass( effect )		
+	}
 
-	// add HorizontalBlur Pass
-	var effect	= new THREE.ShaderPass( THREE.HorizontalBlurShader )
-	effect.uniforms[ 'h' ].value	= blurHLevel 
-	composer.addPass( effect )
-	// add Vertical Pass
-	var effect	= new THREE.ShaderPass( THREE.VerticalBlurShader )
-	effect.uniforms[ 'v' ].value	= blurVLevel
-	composer.addPass( effect )
-	
-	// add HorizontalBlur Pass
-	var effect	= new THREE.ShaderPass( THREE.HorizontalBlurShader )
-	effect.uniforms[ 'h' ].value	= blurHLevel 
-	composer.addPass( effect )
-	// add Vertical Pass
-	var effect	= new THREE.ShaderPass( THREE.VerticalBlurShader )
-	effect.uniforms[ 'v' ].value	= blurVLevel
-	composer.addPass( effect )
-	
-	// add HorizontalBlur Pass
-	var effect	= new THREE.ShaderPass( THREE.HorizontalBlurShader )
-	effect.uniforms[ 'h' ].value	= blurHLevel 
-	composer.addPass( effect )
-	// add Vertical Pass
-	var effect	= new THREE.ShaderPass( THREE.VerticalBlurShader )
-	effect.uniforms[ 'v' ].value	= blurVLevel
-	composer.addPass( effect )
 	
 	this.update = function(delta, now) {
 		composer.render(delta);

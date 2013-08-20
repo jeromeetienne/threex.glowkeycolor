@@ -13,9 +13,9 @@
 <script src='../threex.glowkeycolor.js'></script>
 <script src='../threex.glowrenderer.js'></script>
 <!-- include for threex.glowdatgui -->
-<!-- <script src='../../../vendor/three.js/examples/js/libs/dat.gui.min.js'></script>
-<script src='../threex.glowdatgui.js'></script>
- --><!-- Start the code itself -->
+<script src='vendor/three.js/examples/js/libs/dat.gui.min.js'></script>
+<script src='../threex.glowkeydatgui.js'></script>
+<!-- Start the code itself -->
 <body style='margin: 0px; background-color: #bbbbbb;overflow: hidden;'><script>
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
@@ -86,6 +86,9 @@
 	updateFcts.push(function(delta, now){
 		glowRenderer.update(delta, now)
 	})
+
+	THREEx.addGlowKeyColorDatGui(glowRenderer.glow)
+	
 	// updateFcts.push(function(delta, now){
 	// 	renderer.render(scene,camera)
 	// })

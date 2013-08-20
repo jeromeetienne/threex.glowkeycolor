@@ -9,6 +9,7 @@ THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
 	this.glowColor	= glowColor
 
 	var glow	= new THREEx.GlowKeyColor(renderer, camera, undefined, scene)
+	this.glow	= glow
 	glow.filterEffect.uniforms.keyColor.value	= keyColor
 	glow.filterEffect.uniforms.glowColor.value	= glowColor
 
