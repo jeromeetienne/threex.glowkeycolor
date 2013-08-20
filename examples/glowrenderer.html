@@ -39,32 +39,22 @@
 	// var glowColor	= new THREE.Color('red')
 		
 	var geometry	= new THREE.TorusGeometry( 0.5-0.15, 0.15, 32, 16)
-	// var geometry	= new THREE.SphereGeometry( 0.5, 32, 16)
-	var material	= new THREE.MeshNormalMaterial()
+	var geometry	= new THREE.TorusKnotGeometry(0.5-0.12, 0.12, 32*3, 32);
 	var material	= new THREE.MeshBasicMaterial({
 		color	: keyColor
 	});
 	var mesh	= new THREE.Mesh( geometry, material )
-	mesh.scale.set(1,1,1).multiplyScalar(1)
-	// mesh.visible	= false
 	scene.add( mesh )
 	
-	// var meshWire	= new THREE.Mesh(geometry.clone(), new THREE.MeshBasicMaterial({
-	// 		color			: keyColor,
-	// 		wireframe		: true,
-	// 		wireframeLinewidth	: 4,
-	// 	})
-	// )
-	// meshWire.scale.multiplyScalar(1.001)
-	// mesh.add( meshWire )
 
 
 	var geometry	= new THREE.CubeGeometry(1, 1, 1)
 	var material	= new THREE.MeshNormalMaterial()
 	var torus1	= new THREE.Mesh( geometry, material )
 	torus1.position.x	= 0.5;
+	torus1.position.z	= 0.5;
 	torus1.scale.set(1,1,1).multiplyScalar(1/2)
-	mesh.add( torus1 )
+	scene.add( torus1 )
 
 	var geometry	= new THREE.CubeGeometry( 1, 1, 1)
 	var material	= new THREE.MeshNormalMaterial()

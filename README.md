@@ -18,7 +18,6 @@ it provides a glow based on key-color.
 * then the original render is blended with the blur rendertarget
 * it is that simple.
 
-
 ## How To Add a Glowing Object
 
 just use a ```THREE.MeshBasicMaterial``` with the keycolor, say ```hotpink```
