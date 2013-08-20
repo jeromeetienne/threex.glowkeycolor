@@ -15,8 +15,8 @@
 <body><script>
 	// boiler plate
 	var world	= tQuery.createWorld().boilerplate().start();
-	world.tRenderer().setClearColor( 0x000000, 1 );
-	
+	world.tRenderer().setClearColor( 0x000000, 1 )
+
 	// color config
 	var keyColor	= new THREE.Color('hotpink')
 	var glowColor	= new THREE.Color('red')
@@ -29,8 +29,7 @@
 	});
 	// create the mesh and add it to the scene
 	var mesh	= new THREE.Mesh( geometry, material )
-	world.add( mesh ) 
-
+	world.add( mesh )
 
 	// hijack usual rendering to put the glow one
 ;(function(){

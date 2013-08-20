@@ -20,7 +20,8 @@ THREEx.GlowKeyColor	= function(renderer, camera, renderTarget, scene){
 	this.composer	= composer
 
 // @TODO pass the srcRenderTarget, dstRenderTarget
-// - see sslensflare
+// - see sslensflare for info
+// 
 	// add Render Pass
 	var effect	= new THREE.RenderPass(scene, camera);
 	composer.addPass( effect )
