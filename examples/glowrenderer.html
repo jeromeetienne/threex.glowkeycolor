@@ -15,7 +15,7 @@
 <script src='../threex.glowrenderer.js'></script>
 <!-- include for threex.glowdatgui -->
 <script src='vendor/three.js/examples/js/libs/dat.gui.min.js'></script>
-<script src='../threex.glowkeydatgui.js'></script>
+<script src='../threex.glowrendererdatgui.js'></script>
 <!-- Start the code itself -->
 <body style='margin: 0px; background-color: #bbbbbb;overflow: hidden;'><script>
 	// init renderer
@@ -93,7 +93,8 @@
 		glowRenderer.update(delta, now)
 	})
 
-	THREEx.addGlowKeyColorDatGui(glowRenderer.glow)
+	// add a DAT.gui for fine tuning
+	THREEx.addGlowRendererDatGui(glowRenderer)
 	
 	//////////////////////////////////////////////////////////////////////////////////
 	//		loop runner							//

@@ -4,16 +4,19 @@
  */
 var THREEx	= THREEx || {};
 
-THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
+THREEx.addGlowRendererDatGui	= function(glowRenderer, datGui){
 	datGui		= datGui || new dat.GUI()
-	var filterEffect= glow.filterEffect
-	var passes	= glow.composer.passes
+	var filterEffect= glowRenderer.glow.filterEffect
+	var glowPasses	= glowRenderer.glow.composer.passes
+	var blendEffect	= glowRenderer.blendEffect
 	// options
 	var options  = {
-		blurHLevel	: passes[2].uniforms['h'].value,
-		blurVLevel	: passes[3].uniforms['v'].value,
+		glowFactor	: blendEffect.uniforms['glowFactor'].value,
+		blurHLevel	: glowPasses[2].uniforms['h'].value,
+		blurVLevel	: glowPasses[3].uniforms['v'].value,
 		keyColor	: '#'+filterEffect.uniforms['keyColor'].value.getHexString(),
 		glowColor	: '#'+filterEffect.uniforms['glowColor'].value.getHexString(),
+		// glowColor	: '#'+glow.glowColor.getHexString(),
 		presetLow	: function(){
 			options.blurHLevel	= 0.003
 			options.blurVLevel	= 0.006
@@ -26,9 +29,10 @@ THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
 		},
 	}
 	var onChange = function(){
-		for(var i = 0; i < glow.nBlurPass; i++){
-			passes[2+i*2].uniforms['h'].value	= options.blurHLevel
-			passes[3+i*2].uniforms['v'].value	= options.blurVLevel	
+		blendEffect.uniforms['glowFactor'].value	= options.glowFactor
+		for(var i = 0; i < glowRenderer.glow.nBlurPass; i++){
+			glowPasses[2+i*2].uniforms['h'].value	= options.blurHLevel
+			glowPasses[3+i*2].uniforms['v'].value	= options.blurVLevel	
 		}
 		filterEffect.uniforms.keyColor.value.set( options.keyColor ); 
 		filterEffect.uniforms.glowColor.value.set( options.glowColor ); 
@@ -36,6 +40,7 @@ THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
 	onChange()
 	
 	// config datGui
+	datGui.add( options, 'glowFactor', 0.0 , 15)	.listen().onChange( onChange )
 	datGui.add( options, 'blurHLevel', 0.0 , 0.1)	.listen().onChange( onChange )
 	datGui.add( options, 'blurVLevel', 0.0 , 0.1)	.listen().onChange( onChange )
 	datGui.addColor( options, 'keyColor' )		.listen().onChange( onChange )
