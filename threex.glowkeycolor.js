@@ -29,7 +29,7 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 	//////////////////////////////////////////////////////////////////////////////////
 
 	// create the composer
-	var composer	= new THREE.EffectComposer( renderer, dstRenderTarget );
+	var composer	= new THREE.EffectComposer( renderer, dstRenderTarget )
 	this.composer	= composer
 	
 	updateFcts.push(function(delta, now){

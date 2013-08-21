@@ -38,8 +38,9 @@
 	var keyColor	= new THREE.Color('hotpink')
 	var glowColor	= new THREE.Color('blue')
 	var glowColor	= new THREE.Color('white')
-	// var glowColor	= new THREE.Color(0x88ccff)
-	var glowColor	= new THREE.Color('green')
+	var glowColor	= new THREE.Color(0x88ccff)
+	// var glowColor	= new THREE.Color('green')
+	// var glowColor	= new THREE.Color(0x520080)
 	
 	//////////////////////////////////////////////////////////////////////////////////
 	//		create a scene							//
@@ -53,8 +54,8 @@
 		var material	= new THREE.MeshBasicMaterial({
 			// wireframe		: true,
 			// wireframeLinewidth	: 3,
-			color	: keyColor,
 		});
+		material.color	= keyColor;
 		var mesh	= new THREE.Mesh( geometry, material )
 		scene.add( mesh )
 		updateFcts.push(function(delta, now){

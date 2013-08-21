@@ -16,7 +16,6 @@ THREEx.addGlowRendererDatGui	= function(glowRenderer, datGui){
 		blurVLevel	: glowPasses[3].uniforms['v'].value,
 		keyColor	: '#'+filterEffect.uniforms['keyColor'].value.getHexString(),
 		glowColor	: '#'+filterEffect.uniforms['glowColor'].value.getHexString(),
-		// glowColor	: '#'+glow.glowColor.getHexString(),
 		presetLow	: function(){
 			options.blurHLevel	= 0.003
 			options.blurVLevel	= 0.006
@@ -41,8 +40,8 @@ THREEx.addGlowRendererDatGui	= function(glowRenderer, datGui){
 	
 	// config datGui
 	datGui.add( options, 'glowFactor', 0.0 , 15)	.listen().onChange( onChange )
-	datGui.add( options, 'blurHLevel', 0.0 , 0.1)	.listen().onChange( onChange )
-	datGui.add( options, 'blurVLevel', 0.0 , 0.1)	.listen().onChange( onChange )
+	datGui.add( options, 'blurHLevel', 0.0 , 0.03)	.listen().onChange( onChange )
+	datGui.add( options, 'blurVLevel', 0.0 , 0.03)	.listen().onChange( onChange )
 	datGui.addColor( options, 'keyColor' )		.listen().onChange( onChange )
 	datGui.addColor( options, 'glowColor' )		.listen().onChange( onChange )
 	datGui.add( options, 'presetLow' )

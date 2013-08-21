@@ -37,8 +37,8 @@ THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
 	
 	var glow	= new THREEx.GlowKeyColor(renderer, camera, colorRenderTarget, undefined);
 	this.glow	= glow
-	glow.filterEffect.uniforms.keyColor.value.copy( keyColor )
-	glow.filterEffect.uniforms.glowColor.value.copy( glowColor )
+	glow.filterEffect.uniforms.keyColor.value	= keyColor
+	glow.filterEffect.uniforms.glowColor.value	= glowColor
 	// actually render it
 	updateFcts.push(function(delta, now){
 		glow.update(delta, now);
@@ -57,10 +57,10 @@ THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
 	// add Blend Pass - to blend with glow.renderTarget
 	var effect	= new THREE.ShaderPass( THREEx.GlowKeyColor.BlendShader, 'tDiffuse1');
 	this.blendEffect= effect
-	effect.uniforms['tDiffuse2' ].value	= glow.dstRenderTarget;
-	effect.uniforms['glowFactor' ].value	= 4.0;
-	effect.uniforms['keyColor' ].value	= keyColor;
-	effect.uniforms['glowColor' ].value	= glowColor;
+	effect.uniforms.tDiffuse2.value	= glow.dstRenderTarget;
+	effect.uniforms.glowFactor.value= 4.0;
+	effect.uniforms.keyColor.value	= keyColor;
+	effect.uniforms.glowColor.value	= glowColor;
 	composer.addPass( effect );	
 
 	// mark the last pass as ```renderToScreen```
