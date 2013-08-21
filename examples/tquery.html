@@ -1,4 +1,4 @@
-<!doctype html><title>Minimal tQuery Page</title>
+ <!doctype html><title>Minimal tQuery Page</title>
 <script src="vendor/tquery/build/tquery-bundle.js"></script>
 <!-- includes for THREE.EffectComposer -->
 <script src="vendor/three.js/examples/js/postprocessing/EffectComposer.js"></script>
@@ -15,12 +15,14 @@
 <body><script>
 	// boiler plate
 	var world	= tQuery.createWorld().boilerplate().start();
+	
 	world.tRenderer().setClearColor( 0x000000, 1 )
 
 	// color config
-	var keyColor	= new THREE.Color('hotpink')
+	var keyColor	= new THREE.Color('green')
 	var glowColor	= new THREE.Color('red')
 	var glowColor	= new THREE.Color(0x88ccff)
+	// var glowColor	= new THREE.Color('black')
 
 	// add a glowing object with keyColor		
 	var geometry	= new THREE.TorusGeometry( 0.5-0.15, 0.15, 32, 16)

@@ -1,41 +1,25 @@
 var THREEx	= THREEx || {};
 
-THREEx.GlowKeyColor	= function(renderer, camera, renderTarget, scene){
-	scene		= scene	|| new THREE.Scene
-	this.scene	= scene
-	// setup the RenderTarget
-	if( renderTarget === undefined ){
-		var textureW	= Math.floor(renderer.domElement.offsetWidth /8)
-		var textureH	= Math.floor(renderer.domElement.offsetHeight/8)
-		renderTarget	= new THREE.WebGLRenderTarget(textureW, textureH, {
+THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarget){
+	// setup the dstRenderTarget
+	if( dstRenderTarget === undefined ){
+		var textureW	= Math.floor(renderer.domElement.offsetWidth /4)
+		var textureH	= Math.floor(renderer.domElement.offsetHeight/4)
+		dstRenderTarget	= new THREE.WebGLRenderTarget(textureW, textureH, {
 			minFilter	: THREE.LinearFilter,
 			magFilter	: THREE.LinearFilter,
 			format		: THREE.RGBFormat
 		})		
 	}
-	this.renderTarget = renderTarget
+	this.dstRenderTarget = dstRenderTarget
 	
 	// create the composer
-	var composer	= new THREE.EffectComposer( renderer, renderTarget );
+	var composer	= new THREE.EffectComposer( renderer, dstRenderTarget );
 	this.composer	= composer
 
-// @TODO pass the srcRenderTarget, dstRenderTarget
-// - see sslensflare for info
-// 
-	// add Render Pass
-	var effect	= new THREE.RenderPass(scene, camera);
+	// copy color + downsample
+	var effect	= new THREE.TexturePass(srcRenderTarget)
 	composer.addPass( effect )
-	
-;(function(){	// experiment to have only one renderPass
-	// create the effect
-	var renderTarget	= new THREE.WebGLRenderTarget(textureW, textureH, {
-		minFilter	: THREE.LinearFilter,
-		magFilter	: THREE.LinearFilter,
-		format		: THREE.RGBFormat
-	});
-	var effect	= new THREE.SavePass(renderTarget);
-	composer.addPass( effect )
-})()
 
 	var effect	= new THREE.ShaderPass( THREEx.GlowKeyColor.ColorPassBandShader )
 	this.filterEffect	= effect
@@ -115,18 +99,15 @@ THREEx.GlowKeyColor.BlendShader = {
 			'vec4 texel1 = texture2D( tDiffuse1, vUv );',
 			'vec4 texel2 = texture2D( tDiffuse2, vUv );',
 			
-			// TODO if srcTarget is keyColor then keep it
+			// if original rendering keyColor then keep change it to glowColor
 			'if( equal(texel1.xyz, keyColor) == bvec3(true) ){',
 				'texel1	= vec4(glowColor, 1);',
 			'}',
-			'gl_FragColor	= opacity * mix( texel1, texel2, mixRatio );',
-
-
-			// 'if( equal(texel1.xyz, keyColor) == bvec3(true) ){',
-			// 	'gl_FragColor	= vec4(glowColor, 1);',
-			// '}else{',
-			// 	'gl_FragColor	= opacity * mix( texel1, texel2, mixRatio );',
-			// '}',
+			
+			'if( equal(texel2.xyz, vec3(0.0,0.0,0.0)) != bvec3(true) ){',
+				'texel2 *= vec4(vec3(10.0), 1.0);',
+			'}',
+			'gl_FragColor	= (texel1 + texel2)*0.5;',
 
 		'}'
 	].join('\n')

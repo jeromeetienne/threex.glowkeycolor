@@ -1,7 +1,15 @@
 threex.glowkeycolor
 ===================
 
-it provides a glow based on key-color.
+It is a three.js extension which provide a glow based on key-color.
+There is a single scene which is rendered only once.
+It all happens in screenspace.
+
+## TODO
+* rename files
+* there is actually several render in this
+  * see threex.sslensflare for better way to do this
+* find a nice example
 
 ## Algorithm
 * it is starting from a existing scene

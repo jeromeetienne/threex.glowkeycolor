@@ -9,8 +9,8 @@ THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
 	var passes	= glow.composer.passes
 	// options
 	var options  = {
-		blurHLevel	: passes[3].uniforms['h'].value,
-		blurVLevel	: passes[4].uniforms['v'].value,
+		blurHLevel	: passes[2].uniforms['h'].value,
+		blurVLevel	: passes[3].uniforms['v'].value,
 		presetLow	: function(){
 			options.blurHLevel	= 0.003
 			options.blurVLevel	= 0.006
@@ -24,8 +24,8 @@ THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
 	}
 	var onChange = function(){
 		for(var i = 0; i < glow.nBlurPass; i++){
-			passes[3+i*2].uniforms['h'].value	= options.blurHLevel
-			passes[4+i*2].uniforms['v'].value	= options.blurVLevel	
+			passes[2+i*2].uniforms['h'].value	= options.blurHLevel
+			passes[3+i*2].uniforms['v'].value	= options.blurVLevel	
 		}
 	}
 	onChange()
