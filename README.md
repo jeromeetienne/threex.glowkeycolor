@@ -56,3 +56,15 @@ You can add a [dat.gui](https://code.google.com/p/dat-gui/) for fine tuning.
 ```javascript
 THREEx.addGlowKeyColorDatGui(glowRenderer.glow)
 ```
+
+# Possible Improvements
+* able to have a texture behind the keycolor
+  * change the selection glowing/not-glowing
+  * currently this is done with a full vec4() color
+  * simply do a if(texel.a == 0.01) then glowing, else notglowing
+  * thus the texel can still contains a texture
+    * CON: require to accuratly encode the texture
+  * now you do the same rendering, but add a edge detection in the glow pass
+  * thus only the borders of the glowing shape will be glowing
+  * the inner part of the object will be untouched or close
+  * so the texture will still be seeable

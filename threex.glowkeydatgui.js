@@ -17,8 +17,8 @@ THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
 			onChange()
 		},
 		presetHigh	: function(){
-			options.blurHLevel	= 0.009
-			options.blurVLevel	= 0.018
+			options.blurHLevel	= 0.006
+			options.blurVLevel	= 0.012
 			onChange()
 		},
 	}

@@ -3,8 +3,8 @@ var THREEx	= THREEx || {};
 THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarget){
 	// setup the dstRenderTarget
 	if( dstRenderTarget === undefined ){
-		var textureW	= Math.floor(renderer.domElement.offsetWidth /4)
-		var textureH	= Math.floor(renderer.domElement.offsetHeight/4)
+		var textureW	= Math.floor(renderer.domElement.offsetWidth /8)
+		var textureH	= Math.floor(renderer.domElement.offsetHeight/8)
 		dstRenderTarget	= new THREE.WebGLRenderTarget(textureW, textureH, {
 			minFilter	: THREE.LinearFilter,
 			magFilter	: THREE.LinearFilter,
@@ -13,10 +13,33 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 	}
 	this.dstRenderTarget = dstRenderTarget
 	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		update loop							//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var updateFcts	= []
+	this.update	= function(delta, now){
+		updateFcts.forEach(function(updateFct){
+			updateFct(delta, now)
+		})
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+
 	// create the composer
 	var composer	= new THREE.EffectComposer( renderer, dstRenderTarget );
 	this.composer	= composer
+	
+	updateFcts.push(function(delta, now){
+		composer.render(delta);		
+	})
 
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+	
 	// copy color + downsample
 	var effect	= new THREE.TexturePass(srcRenderTarget)
 	composer.addPass( effect )
@@ -26,8 +49,8 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 	composer.addPass( effect )
 
 	// configuration 
-	var blurHLevel	= 0.009
-	var blurVLevel	= 0.018
+	var blurHLevel	= 0.006
+	var blurVLevel	= 0.012
 
 	console.assert( THREE.HorizontalBlurShader )
 	console.assert( THREE.VerticalBlurShader )
@@ -44,11 +67,6 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 		effect.uniforms[ 'v' ].value	= blurVLevel
 		composer.addPass( effect )		
 	}
-
-	
-	this.update = function(delta, now) {
-		composer.render(delta);
-	}
 }
 
 /**
@@ -60,8 +78,7 @@ THREEx.GlowKeyColor.BlendShader = {
 	uniforms: {
 		'tDiffuse1'	: { type: 't', value: null },
 		'tDiffuse2'	: { type: 't', value: null },
-		'mixRatio'	: { type: 'f', value: 0.9 },
-		'opacity'	: { type: 'f', value: 2.0 },
+		glowFactor	: { type: 'f', value: 4.0 },
 		keyColor	: {
 			type	: 'c',
 			value	: new THREE.Color().set('red')
@@ -84,15 +101,13 @@ THREEx.GlowKeyColor.BlendShader = {
 	].join('\n'),
 
 	fragmentShader: [
-		'uniform float opacity;',
-		'uniform float mixRatio;',
-
 		'uniform sampler2D tDiffuse1;',
 		'uniform sampler2D tDiffuse2;',
 
 		'varying vec2 vUv;',
 		'uniform vec3 keyColor;',
 		'uniform vec3 glowColor;',
+		'uniform float glowFactor;',
 
 		'void main() {',
 
@@ -104,10 +119,11 @@ THREEx.GlowKeyColor.BlendShader = {
 				'texel1	= vec4(glowColor, 1);',
 			'}',
 			
+			// if texel2 is glowing, then increase it
 			'if( equal(texel2.xyz, vec3(0.0,0.0,0.0)) != bvec3(true) ){',
-				'texel2 *= vec4(vec3(10.0), 1.0);',
+				'texel2 *= vec4(vec3(glowFactor), 1.0);',
 			'}',
-			'gl_FragColor	= (texel1 + texel2)*0.5;',
+			'gl_FragColor	= texel1 + texel2;',
 
 		'}'
 	].join('\n')
