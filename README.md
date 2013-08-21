@@ -9,7 +9,10 @@ It all happens in screenspace.
 * rename files
 * find a nice example
   * minecraft with star war sword
-    * 
+  * or just a tron
+* make it possible to have multiple keyColor/glowColor
+  * https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLShaders.js#L448
+  * https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLShaders.js#L504
 
 ## Algorithm
 * it is starting from a existing scene

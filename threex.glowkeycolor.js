@@ -52,6 +52,7 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 	var blurHLevel	= 0.006
 	var blurVLevel	= 0.012
 
+
 	console.assert( THREE.HorizontalBlurShader )
 	console.assert( THREE.VerticalBlurShader )
 
@@ -67,6 +68,28 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 		effect.uniforms[ 'v' ].value	= blurVLevel
 		composer.addPass( effect )		
 	}
+
+	// getter/setter for blurHLevel/blurVLevel	
+	Object.defineProperty(this, 'blurHLevel', {
+		get	: function(){ return blurHLevel; },
+		set	: function(value){
+			blurHLevel	= value
+			for(var i = 0; i < nBlurPass; i++){
+				var pass	= composer.passes[i*2 + 2]
+				pass.uniforms[ 'h' ].value	= blurHLevel 
+			}
+		}
+	})
+	Object.defineProperty(this, 'blurVLevel', {
+		get	: function(){ return blurVLevel; },
+		set	: function(value){
+			blurVLevel	= value
+			for(var i = 0; i < nBlurPass; i++){
+				var pass	= composer.passes[i*2 + 3]
+				pass.uniforms[ 'v' ].value	= blurVLevel 
+			}
+		}
+	})
 }
 
 
