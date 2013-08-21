@@ -3,8 +3,8 @@ var THREEx	= THREEx || {};
 THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarget){
 	// setup the dstRenderTarget
 	if( dstRenderTarget === undefined ){
-		var textureW	= Math.floor(renderer.domElement.offsetWidth /8)
-		var textureH	= Math.floor(renderer.domElement.offsetHeight/8)
+		var textureW	= Math.floor(renderer.domElement.offsetWidth /2)
+		var textureH	= Math.floor(renderer.domElement.offsetHeight/2)
 		dstRenderTarget	= new THREE.WebGLRenderTarget(textureW, textureH, {
 			minFilter	: THREE.LinearFilter,
 			magFilter	: THREE.LinearFilter,
@@ -69,6 +69,10 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 	}
 }
 
+
+/**
+ * ColorPassBandShader - it is to keep only the keyColor - and maybe downsampling too 
+ */
 THREEx.GlowKeyColor.ColorPassBandShader	= {
 	uniforms: {
 		tDiffuse	: {

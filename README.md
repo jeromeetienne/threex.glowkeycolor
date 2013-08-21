@@ -7,9 +7,9 @@ It all happens in screenspace.
 
 ## TODO
 * rename files
-* there is actually several render in this
-  * see threex.sslensflare for better way to do this
 * find a nice example
+  * minecraft with star war sword
+    * 
 
 ## Algorithm
 * it is starting from a existing scene

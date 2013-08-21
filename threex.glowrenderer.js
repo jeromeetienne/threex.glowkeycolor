@@ -25,7 +25,7 @@ THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
 	var colorRenderTarget	= new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight, {
 		minFilter	: THREE.LinearFilter,
 		magFilter	: THREE.LinearFilter,
-		format		: THREE.RGBAFormat,
+		format		: THREE.RGBFormat,
 	});
 	updateFcts.push(function(){
 		renderer.render( scene, camera, colorRenderTarget );		
@@ -58,7 +58,6 @@ THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
 	var effect	= new THREE.ShaderPass( THREEx.GlowKeyColor.BlendShader, 'tDiffuse1');
 	this.blendEffect= effect
 	effect.uniforms.tDiffuse2.value	= glow.dstRenderTarget;
-	effect.uniforms.glowFactor.value= 4.0;
 	effect.uniforms.keyColor.value	= keyColor;
 	effect.uniforms.glowColor.value	= glowColor;
 	composer.addPass( effect );	
