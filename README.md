@@ -16,9 +16,9 @@ It all happens in screenspace.
 
 Show Don't Tell
 ===============
-* [glowkeycolor.html example](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.html)[\[source\]](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.html).
+* [examples/glowkeycolor.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.html)\[[source]\](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.html).
 It is usage example of threex.glowkeycolor.js
-* [glowrenderer.html example](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowrenderer.html)\[[source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowrenderer.html)\].
+* [examples/glowrenderer.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowrenderer.html)\[[source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowrenderer.html)\].
 It is usage example of threex.glowkeycolor.js
 
 * Here is an [usage example of threex.glowkeycolor](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.html) and its [source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.html).
