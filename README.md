@@ -20,7 +20,7 @@ Show Don't Tell
 It is usage example of threex.glowkeycolor.js
 * [examples/glowrenderer.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowrenderer.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowrenderer.html)\].
 It is usage example of threex.glowkeycolor.js
-* [examples/minecraft-tron.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/minecraft-tron.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft-tron.html)\].
+* [examples/minecraft_tron.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/minecraft_tron.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html)\].
 It shows a minecraft character with a skin tron-line, glowing ofcourse :)
 It shows how the key color can be put in a texture.
 
@@ -40,7 +40,7 @@ scene.add( mesh )
 ```
 
 Maybe you want to put the keyColor in a texture, thus only this part of the texture will 
-glow. see [minecraft-tron example](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html).
+glow. see [minecraft_tron example](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html).
 
 threex.glowrenderer.js
 ======================
