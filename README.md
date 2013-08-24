@@ -7,9 +7,9 @@ It all happens in screenspace.
 
 Show Don't Tell
 ===============
-* [examples/glowkeycolor.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.html)\].
+* [examples/glowkeycolor.postproc.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.postproc.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.postproc.html)\].
 It is usage example of threex.glowkeycolor.js
-* [examples/glowrenderer.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowrenderer.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowrenderer.html)\].
+* [examples/glowkeycolor.renderer.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.renderer.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.renderer.html)\].
 It is usage example of threex.glowkeycolor.js
 * [examples/minecraft_tron.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/minecraft_tron.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html)\].
 It shows a minecraft character with a skin tron-line, glowing ofcourse :)
@@ -33,11 +33,11 @@ scene.add( mesh )
 Maybe you want to put the keyColor in a texture, thus only this part of the texture will 
 glow. see [minecraft_tron example](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html).
 
-threex.glowrenderer.js
-======================
+threex.glowkeycolor.renderer.js
+===============================
 
 ```javascript
-var glowRenderer	= new THREEx.GlowRenderer(renderer, camera, scene, keyColor, glowColor)
+var glowRenderer	= new THREEx.GlowKeyColor.Renderer(renderer, camera, scene, keyColor, glowColor)
 updateFcts.push(function(delta, now){
 	// to update at every frame
 	glowRenderer.update(delta, now)
@@ -50,7 +50,7 @@ threex.glowkeydatgui.js
 You can add a [dat.gui](https://code.google.com/p/dat-gui/) for fine tuning.
 
 ```javascript
-THREEx.addGlowKeyColorDatGui(glowRenderer.glow)
+THREEx.GlowKeyColor.addRendererDatGui(glowRenderer.glow)
 ```
 
 Algorithm Steps
