@@ -1,6 +1,8 @@
 var THREEx	= THREEx || {};
 
-THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
+THREEx.GlowKeyColor	= THREEx.GlowKeyColor	|| {}
+
+THREEx.GlowKeyColor.Renderer	= function(renderer, camera, scene, keyColor, glowColor){
 	// init argument
 	keyColor	= keyColor	|| new THREE.Color('hotpink')
 	this.keyColor	= keyColor
@@ -35,13 +37,13 @@ THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
 	//		do the glow rendering=						//
 	//////////////////////////////////////////////////////////////////////////////////
 	
-	var glow	= new THREEx.GlowKeyColor(renderer, camera, colorRenderTarget, undefined);
-	this.glow	= glow
-	glow.filterEffect.uniforms.keyColor.value	= keyColor
-	glow.filterEffect.uniforms.glowColor.value	= glowColor
+	var glowPostProc  = new THREEx.GlowKeyColor.PostProc(renderer, camera, colorRenderTarget, undefined);
+	this.glowPostProc = glowPostProc
+	glowPostProc.filterEffect.uniforms.keyColor.value	= keyColor
+	glowPostProc.filterEffect.uniforms.glowColor.value	= glowColor
 	// actually render it
 	updateFcts.push(function(delta, now){
-		glow.update(delta, now);
+		glowPostProc.update(delta, now);
 	})
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +59,7 @@ THREEx.GlowRenderer	= function(renderer, camera, scene, keyColor, glowColor){
 	// add Blend Pass - to blend with glow.renderTarget
 	var effect	= new THREE.ShaderPass( THREEx.GlowKeyColor.BlendShader, 'tDiffuse1');
 	this.blendEffect= effect
-	effect.uniforms.tDiffuse2.value	= glow.dstRenderTarget;
+	effect.uniforms.tDiffuse2.value	= glowPostProc.dstRenderTarget;
 	effect.uniforms.keyColor.value	= keyColor;
 	effect.uniforms.glowColor.value	= glowColor;
 	composer.addPass( effect );	

@@ -5,15 +5,6 @@ It is a three.js extension which provide a glow based on key-color.
 There is a single scene which is rendered only once.
 It all happens in screenspace.
 
-## TODO
-* rename files
-  * glowkeycolorPostProc
-  * glowkeycolorRenderer
-  * ok for the files...
-  * but long for the source.
-    * var glowPostProc  = new THREEx.GlowKeyColor.PostProc()
-    * var glowRenderer  = new THREEx.GlowKeyColor.Renderer()
-
 Show Don't Tell
 ===============
 * [examples/glowkeycolor.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.html)\].

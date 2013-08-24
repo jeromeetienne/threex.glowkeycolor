@@ -4,16 +4,18 @@
  */
 var THREEx	= THREEx || {};
 
-THREEx.addGlowRendererDatGui	= function(glowRenderer, datGui){
+THREEx.GlowKeyColor	= THREEx.GlowKeyColor	|| {}
+
+THREEx.GlowKeyColor.addRendererDatGui	= function(glowRenderer, datGui){
 	datGui		= datGui || new dat.GUI()
-	var filterEffect= glowRenderer.glow.filterEffect
-	var glowPasses	= glowRenderer.glow.composer.passes
+	var filterEffect= glowRenderer.glowPostProc.filterEffect
+	var pprocPasses	= glowRenderer.glowPostProc.composer.passes
 	var blendEffect	= glowRenderer.blendEffect
 	// options
 	var options  = {
 		glowFactor	: blendEffect.uniforms['glowFactor'].value,
-		blurHLevel	: glowPasses[2].uniforms['h'].value,
-		blurVLevel	: glowPasses[3].uniforms['v'].value,
+		blurHLevel	: pprocPasses[2].uniforms['h'].value,
+		blurVLevel	: pprocPasses[3].uniforms['v'].value,
 		keyColor	: '#'+filterEffect.uniforms['keyColor'].value.getHexString(),
 		glowColor	: '#'+filterEffect.uniforms['glowColor'].value.getHexString(),
 		presetLow	: function(){
@@ -29,9 +31,9 @@ THREEx.addGlowRendererDatGui	= function(glowRenderer, datGui){
 	}
 	var onChange = function(){
 		blendEffect.uniforms['glowFactor'].value	= options.glowFactor
-		for(var i = 0; i < glowRenderer.glow.nBlurPass; i++){
-			glowPasses[2+i*2].uniforms['h'].value	= options.blurHLevel
-			glowPasses[3+i*2].uniforms['v'].value	= options.blurVLevel	
+		for(var i = 0; i < glowRenderer.glowPostProc.nBlurPass; i++){
+			pprocPasses[2+i*2].uniforms['h'].value	= options.blurHLevel
+			pprocPasses[3+i*2].uniforms['v'].value	= options.blurVLevel	
 		}
 		filterEffect.uniforms.keyColor.value.set( options.keyColor ); 
 		filterEffect.uniforms.glowColor.value.set( options.glowColor ); 

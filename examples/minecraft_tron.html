@@ -11,11 +11,11 @@
 <!-- includes for threex.glow -->
 <script src='vendor/three.js/examples/js/shaders/HorizontalBlurShader.js'></script>
 <script src='vendor/three.js/examples/js/shaders/VerticalBlurShader.js'></script>
-<script src='../threex.glowkeycolor.js'></script>
-<script src='../threex.glowrenderer.js'></script>
+<script src='../threex.glowkeycolor.postproc.js'></script>
+<script src='../threex.glowkeycolor.renderer.js'></script>
 <!-- include for threex.glowdatgui -->
 <script src='vendor/three.js/examples/js/libs/dat.gui.min.js'></script>
-<script src='../threex.glowrendererdatgui.js'></script>
+<script src='../threex.glowkeycolor.rendererdatgui.js'></script>
 <!-- include for threex.minecraft -->
 <script src='vendor/threex.minecraft/threex.minecraft.js'></script>
 <!-- include for threex.minecraft animation -->
@@ -94,15 +94,16 @@
 	//		init glow							//
 	//////////////////////////////////////////////////////////////////////////////////
 
-	var glowRenderer	= new THREEx.GlowRenderer(renderer, camera, scene, keyColor, glowColor)
-	glowRenderer.glow.blurHLevel	= 0.002
-	glowRenderer.glow.blurVLevel	= 0.006
+
+	var glowRenderer	= new THREEx.GlowKeyColor.Renderer(renderer, camera, scene, keyColor, glowColor)
+	glowRenderer.glowPostProc.blurHLevel	= 0.002
+	glowRenderer.glowPostProc.blurVLevel	= 0.006
 	updateFcts.push(function(delta, now){
 		glowRenderer.update(delta, now)
 	})
 
 	// add a DAT.gui for fine tuning
-	THREEx.addGlowRendererDatGui(glowRenderer)
+	THREEx.GlowKeyColor.addRendererDatGui(glowRenderer)
 	
 	//////////////////////////////////////////////////////////////////////////////////
 	//		loop runner							//
