@@ -1,6 +1,8 @@
 var THREEx	= THREEx || {};
 
-THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarget){
+THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarget, nBlurPass){
+	nBlurPass	= nBlurPass !== undefined ? nBlurPass : 1
+
 	// setup the dstRenderTarget
 	if( dstRenderTarget === undefined ){
 		var textureW	= Math.floor(renderer.domElement.offsetWidth /2)
@@ -56,7 +58,6 @@ THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarge
 	console.assert( THREE.HorizontalBlurShader )
 	console.assert( THREE.VerticalBlurShader )
 
-	var nBlurPass	= 1
 	this.nBlurPass	= nBlurPass
 	for(var i = 0; i < nBlurPass; i++){
 		// add HorizontalBlur Pass
