@@ -4,10 +4,12 @@
  */
 var THREEx	= THREEx || {};
 
-THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
+THREEx.GlowKeyColor	= THREEx.GlowKeyColor	|| {}
+
+THREEx.GlowKeyColor.addPostProcDatGui	= function(glowPostProc, datGui){
 	datGui		= datGui || new dat.GUI()
-	var filterEffect= glow.filterEffect
-	var passes	= glow.composer.passes
+	var filterEffect= glowPostProc.filterEffect
+	var passes	= glowPostProc.composer.passes
 	// options
 	var options  = {
 		blurHLevel	: passes[2].uniforms['h'].value,
@@ -26,7 +28,7 @@ THREEx.addGlowKeyColorDatGui	= function(glow, datGui){
 		},
 	}
 	var onChange = function(){
-		for(var i = 0; i < glow.nBlurPass; i++){
+		for(var i = 0; i < glowPostProc.nBlurPass; i++){
 			passes[2+i*2].uniforms['h'].value	= options.blurHLevel
 			passes[3+i*2].uniforms['v'].value	= options.blurVLevel	
 		}

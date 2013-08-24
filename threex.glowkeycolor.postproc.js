@@ -1,6 +1,9 @@
 var THREEx	= THREEx || {};
 
-THREEx.GlowKeyColor	= function(renderer, camera, srcRenderTarget, dstRenderTarget, nBlurPass){
+THREEx.GlowKeyColor	= THREEx.GlowKeyColor	|| {}
+
+
+THREEx.GlowKeyColor.PostProc	= function(renderer, camera, srcRenderTarget, dstRenderTarget, nBlurPass){
 	nBlurPass	= nBlurPass !== undefined ? nBlurPass : 1
 
 	// setup the dstRenderTarget
