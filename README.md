@@ -15,8 +15,16 @@ It is usage example of threex.glowkeycolor.js
 It shows a minecraft character with a skin tron-line, glowing ofcourse :)
 It shows how the key color can be put in a texture.
 
-How To Add a Glowing Object
-===========================
+
+How To Use It
+=============
+
+It happens in 2 steps. First you need to add the keycolor somewhere.
+via material or via texture.
+Then you need to render it
+
+
+## How To Add a Glowing Object
 
 One way is to use a ```THREE.MeshBasicMaterial``` with the keycolor, say ```hotpink```.
 It would make the whole mesh glow.
@@ -34,8 +42,17 @@ Maybe you want to put the keyColor in a texture, thus only this part of the text
 glow. see [minecraft_tron example](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html).
 
 
-How To Use It
-=============
+The easiest way to render it is with the renderer.
+
+```javascript
+var glowRenderer  = new THREEx.GlowKeyColor.Renderer(renderer, camera, scene, keyColor, glowColor)
+updateFcts.push(function(delta, now){
+  glowRenderer.update(delta, now)
+})
+```
+
+API Description
+===============
 
 ## threex.glowkeycolor.postproc.js
 
