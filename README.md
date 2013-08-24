@@ -20,10 +20,8 @@ Show Don't Tell
 It is usage example of threex.glowkeycolor.js
 * [examples/glowrenderer.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowrenderer.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowrenderer.html)\].
 It is usage example of threex.glowkeycolor.js
-
-* Here is an [usage example of threex.glowkeycolor](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowkeycolor.html) and its [source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowkeycolor.html).
-* Here is an [usage example of threex.glowrenderer](http://jeromeetienne.github.io/threex.glowkeycolor/examples/glowrenderer.html) and its [source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/glowrenderer.html).
-* Here is an [minecraft tron example](http://jeromeetienne.github.io/threex.glowkeycolor/examples/minecraft_tron.html) and its [source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html).
+* [examples/minecraft-tron.html](http://jeromeetienne.github.io/threex.glowkeycolor/examples/minecraft-tron.html) \[[view source](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft-tron.html)\].
+It shows a minecraft character with a skin tron-line, glowing ofcourse :)
 It shows how the key color can be put in a texture.
 
 How To Add a Glowing Object
