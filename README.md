@@ -42,7 +42,7 @@ Maybe you want to put the keyColor in a texture, thus only this part of the text
 glow. see [minecraft_tron example](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html).
 
 
-The easiest way to render it is with the renderer.
+The easiest way to render it is with the renderer. 
 
 ```javascript
 var glowRenderer  = new THREEx.GlowKeyColor.Renderer(renderer, camera, scene, keyColor, glowColor)
