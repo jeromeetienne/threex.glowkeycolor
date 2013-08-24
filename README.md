@@ -33,8 +33,45 @@ scene.add( mesh )
 Maybe you want to put the keyColor in a texture, thus only this part of the texture will 
 glow. see [minecraft_tron example](https://github.com/jeromeetienne/threex.glowkeycolor/blob/master/examples/minecraft_tron.html).
 
-threex.glowkeycolor.renderer.js
-===============================
+
+How To Use It
+=============
+
+## threex.glowkeycolor.postproc.js
+
+Here is how to instanciate it. It needs to be updated at every frame
+
+```javascript
+var glowPostProc= new THREEx.GlowKeyColor.PostProc(renderer, camera, colorRenderTarget);
+updateFcts.push(function(delta, now){
+  glowPostProc.update(delta, now);
+})
+```
+
+* ```glowPostProc.filterEffect``` : shader pass for ColorPassBand
+* ```glowPostProc.nBlurPass``` : number of blur pass
+* ```glowPostProc.blurHLevel``` : level of horizontal blur
+* ```glowPostProc.blurVLevel``` : level of vertical blur
+* ```glowPostProc.composer``` : the THREE.EffectComposer 
+* ```glowPostProc.dstRenderTarget``` : the destination render target
+
+here is a possible customisation
+
+```javascript
+glowPostProc.filterEffect.uniforms.keyColor.value = keyColor
+glowPostProc.filterEffect.uniforms.glowColor.value  = glowColor
+```
+
+## threex.glowkeycolor.postprocdatgui.js
+
+You can add a [dat.gui](https://code.google.com/p/dat-gui/) for fine tuning.
+
+```javascript
+THREEx.GlowKeyColor.addPostProcDatGui(glowRenderer)
+```
+
+
+## threex.glowkeycolor.renderer.js
 
 ```javascript
 var glowRenderer	= new THREEx.GlowKeyColor.Renderer(renderer, camera, scene, keyColor, glowColor)
@@ -44,13 +81,12 @@ updateFcts.push(function(delta, now){
 })
 ```
 
-threex.glowkeydatgui.js
-=======================
+## threex.glowkeycolor.rendererdatgui.js
 
 You can add a [dat.gui](https://code.google.com/p/dat-gui/) for fine tuning.
 
 ```javascript
-THREEx.GlowKeyColor.addRendererDatGui(glowRenderer.glow)
+THREEx.GlowKeyColor.addRendererDatGui(glowRenderer)
 ```
 
 Algorithm Steps
@@ -86,7 +122,6 @@ https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js#L4
   * https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLShaders.js#L448
   * https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLShaders.js#L504
   * issue: currently three.js doesnt implement array of color 
-    * 
   * fallback on 'fv'
     * it is for "flat array of floats with 3 x N size"
   * new THREE.Color('hotpink').toArray()
